@@ -11,7 +11,7 @@
         <div class="container">
           <h1 class="display-3">Oui, c'est moche!</h1>
           <p>Mais je n'ai plus la force de faire quelque chose de bien.</p>
-          <p><a class="btn btn-primary btn-lg" href="#" role="button">Crée ton événement &raquo;</a></p>
+          <p><a class="btn btn-primary btn-lg" href="<%= new_event_path %>" role="button">Crée ton événement &raquo;</a></p>
         </div>
       </div>
 
@@ -22,7 +22,8 @@
           <div class="col-md-10">
             <h2><%= event.title%> </h2>
             <p> <%= event.description %> </p>
-            <p><a class="btn btn-secondary" href="#" role="button">Voir l'événeement &raquo;</a></p>
+            
+            <p><a class="btn btn-secondary" href="<%= event_path(event.id) %>" role="button">Voir l'événement &raquo;</a></p>
           </div>
         </div>
       <%end%>
