@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'faker'
 gem 'table_print'
 gem 'dotenv-rails'
+gem 'devise'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
