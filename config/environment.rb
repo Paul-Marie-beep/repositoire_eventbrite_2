@@ -8,8 +8,8 @@ Rails.application.initialize!
 ActionMailer::Base.smtp_settings = {
   :user_name => ENV['SENDGRID_LOGIN'],
   :password => ENV['SENDGRID_PWD'],
-  :domain => 'smtp.sendgrid.net',
-  :address => 'https://fierce-plateau-62518.herokuapp.com',
+  :domain => 'https://fierce-plateau-62518.herokuapp.com',
+  :address => 'smtp.sendgrid.net',
   :port => 587,
   :authentication => :plain,
   :enable_starttls_auto => true
