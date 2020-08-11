@@ -1,2 +1,37 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+
+<!doctype html>
+<html lang="en">
+
+  <body>
+
+    <main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Oui, c'est moche!</h1>
+          <p>Mais je n'ai plus la force de faire quelque chose de bien.</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Crée ton événement &raquo;</a></p>
+        </div>
+      </div>
+
+
+      <% @all_events.each do |event| %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10">
+            <h2><%= event.title%> </h2>
+            <p> <%= event.description %> </p>
+            <p><a class="btn btn-secondary" href="#" role="button">Voir l'événeement &raquo;</a></p>
+          </div>
+        </div>
+      <%end%>
+        <hr>
+
+      </div> <!-- /container -->
+
+    </main>
+
+    <footer class="container">
+      <p>&copy; Company 2017-2018</p>
+    </footer>

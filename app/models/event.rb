@@ -12,7 +12,7 @@ class Event < ApplicationRecord
   validates :location, presence: true
 
   #validate :no_start_date_in_the_past
-  validate :duration_format
+  #validate :duration_format
 
 
 
