@@ -5,7 +5,7 @@ require_relative 'application'
 Rails.application.initialize!
 
 
-AActionMailer::Base.smtp_settings = {
+ActionMailer::Base.smtp_settings = {
   :user_name => ENV['SENDGRID_LOGIN'],
   :password => ENV['SENDGRID_PWD'],
   :domain => 'https://fierce-plateau-62518.herokuapp.com/',
