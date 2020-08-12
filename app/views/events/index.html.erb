@@ -4,6 +4,11 @@
 
   <body>
 
+
+  
+
+         
+     
     <main role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -15,6 +20,12 @@
         </div>
       </div>
 
+      <%if @new_event %>
+      <div class="alert alert-success" role="alert">
+      Votre event a bien été enregistré
+      <div/>
+      <br>
+      <%end%>  
 
       <div class="container">
       <% @all_events.each do |event| %>
