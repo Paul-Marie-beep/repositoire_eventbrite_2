@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    end_date(@event)
   end
 
   def new 
@@ -22,6 +23,14 @@ class EventsController < ApplicationController
         render 'new.html.erb'
       end
   end
+
+
+  private
+
+  def end_date(event)
+    @end_date = event.start_date + event.duration
+  return @end_date
+  end  
 
 
 end

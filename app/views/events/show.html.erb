@@ -1,0 +1,27 @@
+
+
+<br><br>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <br><br><br>
+
+            <ul class="list-group">
+              <li class="list-group-item active"> <%= @event.title %> </li>
+              <li class="list-group-item">Description: <%= @event.description %></li>
+              <li class="list-group-item"><%= @event.attendances.size %> participant(s)</li>
+              <li class="list-group-item">Contacter l'organisateur: <%= @event.admin.email %></li>
+              <li class="list-group-item">Début de l'événement: <%= @event.start_date %></li>
+              <li class="list-group-item">Fin de l'événement: <%= @end_date%></li>
+              <li class="list-group-item">Lieu: <%= @event.location %></li>
+              <li class="list-group-item">Prix: <%= @event.price %>€</li>
+            </ul>
+
+
+       
+
+    </div>
+  </div>
+</div>     
