@@ -36,7 +36,8 @@ class EventsController < ApplicationController
   end
 
   def update
-   if  @event.update(start_date: params[:start_date], duration: params[:duration], title: params[:title], description: params[:description], price: params[:price], location: params[:location])
+    post_params
+   if  @event.update(post_params)
     redirect_to event_path(@event.id)
     else
       flash[:warning] = "Nous n'avons pas pu modifier votre événement"
@@ -98,6 +99,9 @@ class EventsController < ApplicationController
     end
   end
 
+  def post_params
+    @post_params = params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location) 
+  end
 
 
 

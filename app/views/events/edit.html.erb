@@ -17,35 +17,48 @@
         </div>
     <% end %>
       
+    <h1 class="h3 mb-3 font-weight-normal text-center ">Modifier un événement</h1>
 
-      <%= form_tag url_for(action:'update'), method: "patch" do %>
-        <h1 class="h3 mb-3 font-weight-normal text-center ">Modifier un événement</h1>
-        <div class="form-group">
+    <%= form_for @event do |ƒ| %>
 
-        <%= label_tag 'Date de début:' %><br>
-        <%= text_field_tag 'start_date', "", class:"form-control" %><br><br>
+      <div class="form-group">
+      <label> Date de début </label>
+      <%= ƒ.text_field :start_date, class: 'form-control' %>
+      </div>
 
-        <%= label_tag 'Durée (multiple de 5 stp) :' %><br>
-        <%= text_field_tag 'duration', "" ,class:"form-control"%><br><br>
+      <div class="form-group">
+      <label> Durée </label>
+      <%= ƒ.text_field :duration, class: 'form-control' %>
+      </div>
 
-        <%= label_tag 'Titre :' %><br>
-        <%= text_field_tag 'title', "",class:"form-control"%><br><br>
+      <div class="form-group">
+      <label> Titre </label>
+      <%= ƒ.text_field :title, class: 'form-control' %>
+      </div>
 
-        <%= label_tag 'Description :' %><br>
-        <%= text_area_tag 'description',"" ,class:"form-control"%><br><br>
+      <div  class="form-group">
+      <label>Description de l'événement</label>
+      <%= ƒ.text_area :description, class: 'form-control' %>
+      </div>
 
-        <%= label_tag 'Prix :' %><br>
-        <%= text_field_tag 'price',"" ,class:"form-control"%><br><br>
+      <div class="form-group">
+      <label> Prix </label>
+      <%= ƒ.text_field :price, class: 'form-control' %>
+      </div>
+    
+      <div class="form-group">
+      <label> Ville </label>
+      <%= ƒ.text_field :location, class: 'form-control' %>
+      </div>
+    
+      <div class="actions mt-5">
+      <%= submit_tag 'Enregistrer les modifications', class: "btn btn-lg btn-primary btn-block"%>
+      </div>
 
-        <%= label_tag 'Ville :' %><br>
-        <%= text_field_tag 'location',"" ,class:"form-control"%><br>
-        
-        <div class="actions mt-5">
-        <%= submit_tag 'Enregistrer les modifications', class: "btn btn-lg btn-primary btn-block"%>
-        </div>
-
-        <%end%>
-
+      <%end%>
+      
+    
+      
         <br>
         <a href="<%= event_path(@event.id) %>" class="btn btn-danger btn-lg btn-block" data-confirm="êtes-vous sur?" data-method="DELETE">Supprimer l'événement</a>
 
