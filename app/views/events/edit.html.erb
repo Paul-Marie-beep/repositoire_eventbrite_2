@@ -3,6 +3,21 @@
     <div class="col-md-6 offset-md-3">
       <br>
 
+
+      <% if @event.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p>La modifications n'a pu aboutir pour les raisons suivantes :</p>
+        </div>
+        <div class="alert alert-warning" role="alert">
+        <ul>
+          <% @event.errors.full_messages.each do |message| %>
+          <p> <%= message %> </p>
+          <% end %>
+        </ul>
+        </div>
+    <% end %>
+      
+
       <%= form_tag url_for(action:'update'), method: "patch" do %>
         <h1 class="h3 mb-3 font-weight-normal text-center ">Modifier un événement</h1>
         <div class="form-group">

@@ -42,7 +42,7 @@ class EventsController < ApplicationController
     redirect_to event_path(@event.id)
     else
       flash[:warning] = "Nous n'avons pas pu modifier votre potin"
-      render 'edit.hrml.erb'
+      render 'edit.html.erb'
     end
   end
 
