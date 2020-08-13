@@ -13,7 +13,7 @@
 
             <ul class="list-group">
               <li class="list-group-item active"> <%= @event.title %> </li>
-              <li class="list-group-item">Description: <%= @event.description %></li>
+              <li class="list-group-item"><%= @event.description %></li>
               <li class="list-group-item"><%= @event.attendances.size %> participant(s)</li>
               <li class="list-group-item">Contacter l'organisateur: <%= @event.admin.email %></li>
               <li class="list-group-item">Début de l'événement: <%= @event.start_date %></li>
@@ -25,12 +25,20 @@
 
             <br><br>
             <!-- #On ne veut pas que quelqu'un qui participe déjà l'événement ou qui l'organise puisse voir le bouton pour participer -->
-             <%if current_user != @event.admin && @np %>
+            
+            <%if @not_admin && @not_participant %>
             
             <!-- On renvoie vers le controller stripe qui va s'occuper du paiement -->
             <a type="button" href="<%= new_event_charge_path(@event.id) %>" class="btn btn-primary btn-lg btn-block">Participer à l'événement</a>
 
+            <%elsif @not_admin == false %>
+            <!-- #Seul l'administrateur peut accéder à l'espace évenement -->
+            <a type="button" href="<%=event_attendances_path(@event.id) %>" class="btn btn-secondary btn-lg btn-block">Mon espace événement</a>
+
+
             <%end%>
+
+
            
            <br>
        

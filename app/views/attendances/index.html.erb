@@ -1,2 +1,32 @@
-<h1>Attendances#index</h1>
-<p>Find me in app/views/attendances/index.html.erb</p>
+
+
+<br><br>
+      <center> <h1>Voici la liste des participants à ton événement</h1></center>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <br>
+
+
+
+
+
+      <ul class="list-group">
+      <%if @all_attendances_for_this_event == [] %>
+      <p>Il n'y a pas encore de participant</p>
+      <%else%>
+      <% @all_attendances_for_this_event.each do |attendance| %>
+        <li class="list-group-item"><%= attendance.user.first_name %>  <%= attendance.user.first_name %> participe à ton événement! </li>
+        </ul>
+      <%end%>
+      <%end%>
+
+      <br><br>
+      <a type="button" href="<%= edit_event_path(@event.id) %>" class="btn btn-warning btn-lg btn-block">Modifier l'événement</a>
+    
+
+   
+    </div>
+  </div>
+</div>      

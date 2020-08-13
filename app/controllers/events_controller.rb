@@ -1,12 +1,17 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :update]
+  before_action :is_admin, only: [:edit, :update, :destroy]
+
+
   def index
     @all_events = Event.all
   end
 
   def show
-    @event = Event.find(params[:id])
+    event_chosen
     end_date(@event)
-    @np= not__a_participant(@event)
+    @not_participant= not__a_participant(@event)
+    @not_admin = not_admin
 
   end
 
@@ -27,6 +32,33 @@ class EventsController < ApplicationController
   end
 
 
+  def edit
+    event_chosen
+  end
+
+  def update
+    event_chosen
+   if  @event.update(start_date: params[:start_date], duration: params[:duration], title: params[:title], description: params[:description], price: params[:price], location: params[:location])
+    redirect_to event_path(@event.id)
+    else
+      flash[:warning] = "Nous n'avons pas pu modifier votre potin"
+      render 'edit.hrml.erb'
+    end
+  end
+
+
+  def destroy
+    event_chosen
+    @event.destroy
+    redirect_to root_path
+    flash[:succes] = "Vous avez supprimé votre événement"
+  end
+
+
+
+
+
+
   private
 
   #Trouver la date de fin de l'événement
@@ -44,9 +76,30 @@ class EventsController < ApplicationController
       if att_list == []
         return true
       end
-    end  
+    end    
   end
 
+  def event_chosen
+    @event = Event.find(params[:id])
+  end
+
+  def is_admin
+    event_chosen
+    if current_user == @event.admin
+    else 
+      redirect_to root_path
+      flash[:alert] = "Vous n'êtes pas autorisé à faire cela"
+    end
+  end
+
+  def not_admin
+    event_chosen
+    if current_user != @event.admin
+      return true
+    else 
+      return false  
+    end
+  end
 
 
 

@@ -7,7 +7,7 @@ class AttendancesController < ApplicationController
   end
 
   def create
-    @event = Event.find(params[:event_id])
+    event_chosen
     #On pose une condition pour s'assurer qu'on ne puisse pas se retrouver là juste avec les URL.
     if current_user != @event.admin && not__a_participant(@event)
        Attendance.create(event: @event, user: current_user, stripe_customer_id: params[:stripeToken])
@@ -18,6 +18,18 @@ class AttendancesController < ApplicationController
   end
 
   def index
+    event_chosen
+    @not_admin = not_admin(@event)
+    #S'ils essaient de parvenir à la page index via URL, on les dégage
+    if @not_admin 
+      redirect_to root_path
+      flash[:alert] = "Tu fais nimp" 
+    end
+
+    #On sélectionne uniquement les attendances qui concernent notre événement
+    @all_attendances_for_this_event = Attendance.where(event_id: @event.id)
+
+
   end
 
 
@@ -33,6 +45,18 @@ class AttendancesController < ApplicationController
         return true
       end
     end  
+  end
+
+  def event_chosen
+    @event = Event.find(params[:event_id])
+  end
+
+  def not_admin(event)
+    if current_user != event.admin
+      return true
+    else 
+      return false  
+    end
   end
 
 end
