@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :create]
   before_action :is_admin, only: [:edit, :update, :destroy]
+  before_action :event_chosen, only: [:show, :edit, :update, :destroy]
 
 
   def index
@@ -8,7 +9,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    event_chosen
     end_date(@event)
     @not_participant= not__a_participant(@event)
     @not_admin = not_admin
@@ -33,11 +33,9 @@ class EventsController < ApplicationController
 
 
   def edit
-    event_chosen
   end
 
   def update
-    event_chosen
    if  @event.update(start_date: params[:start_date], duration: params[:duration], title: params[:title], description: params[:description], price: params[:price], location: params[:location])
     redirect_to event_path(@event.id)
     else
@@ -48,7 +46,6 @@ class EventsController < ApplicationController
 
 
   def destroy
-    event_chosen
     @event.destroy
     redirect_to root_path
     flash[:succes] = "Vous avez supprimé votre événement"
