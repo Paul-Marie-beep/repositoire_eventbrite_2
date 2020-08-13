@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :create]
   before_action :is_admin, only: [:edit, :update, :destroy]
 
 
@@ -41,7 +41,7 @@ class EventsController < ApplicationController
    if  @event.update(start_date: params[:start_date], duration: params[:duration], title: params[:title], description: params[:description], price: params[:price], location: params[:location])
     redirect_to event_path(@event.id)
     else
-      flash[:warning] = "Nous n'avons pas pu modifier votre potin"
+      flash[:warning] = "Nous n'avons pas pu modifier votre événement"
       render 'edit.html.erb'
     end
   end
