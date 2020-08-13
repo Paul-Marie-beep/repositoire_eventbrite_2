@@ -36,9 +36,9 @@ class EventsController < ApplicationController
   end
 
   def update
-    post_params
-   if  @event.update(post_params)
+   if  @event.update(event_params)
     redirect_to event_path(@event.id)
+    flash[:succes] = "Vous avez modifié votre potin"
     else
       flash[:warning] = "Nous n'avons pas pu modifier votre événement"
       render 'edit.html.erb'
@@ -99,8 +99,8 @@ class EventsController < ApplicationController
     end
   end
 
-  def post_params
-    @post_params = params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location) 
+  def event_params
+    @event_params = params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location) 
   end
 
 
