@@ -27,7 +27,8 @@
             <!-- #On ne veut pas que quelqu'un qui participe déjà l'événement ou qui l'organise puisse voir le bouton pour participer -->
              <%if current_user != @event.admin && @np %>
             
-            <a type="button" href="<%= new_attendance_path %>" class="btn btn-primary btn-lg btn-block">Participer à l'événement</a>
+            <!-- On renvoie vers le controller stripe qui va s'occuper du paiement -->
+            <a type="button" href="<%= new_event_charge_path(@event.id) %>" class="btn btn-primary btn-lg btn-block">Participer à l'événement</a>
 
             <%end%>
            

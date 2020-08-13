@@ -48,6 +48,7 @@ GEM
       io-like (~> 0.3.0)
     arel (9.0.0)
     bcrypt (3.1.15)
+    bcrypt (3.1.15-java)
     bindex (0.8.1)
     bootsnap (1.4.7)
       msgpack (~> 1.0)
@@ -203,6 +204,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    stripe (5.23.1)
     table_print (1.5.7)
     thor (1.0.1)
     thread_safe (0.3.6)
@@ -258,6 +260,7 @@ DEPENDENCIES
   selenium-webdriver
   spring
   spring-watcher-listen (~> 2.0.0)
+  stripe
   table_print
   turbolinks (~> 5)
   tzinfo-data

@@ -57,7 +57,14 @@
         </div>
       </nav>
 
-  
+      <!-- #Pour avoir les messages flash -->
+      <% flash.each do |key, value| %>
+        <button type="button" class="btn btn-light">
+        <div class="flash <%= key %>"><%= value %></div>
+        </button>
+      <% end %>
+
+
     <%= yield %>
 
 
