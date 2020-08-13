@@ -6,6 +6,8 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     end_date(@event)
+    @np= not__a_participant(@event)
+
   end
 
   def new 
@@ -27,10 +29,24 @@ class EventsController < ApplicationController
 
   private
 
+  #Trouver la date de fin de l'événement
   def end_date(event)
     @end_date = event.start_date + event.duration
   return @end_date
   end  
+
+  #Vérifier que quelqu'un qui est connecté sur le site ne participie pas déjà à l'événement dont il regarde la page
+  def not__a_participant(event)
+    #Attendance, c'est la table de jointure users/events —> On cherche les attendances qui font correspondre le personne connectée avec les événéments qu'il regarde
+      att_list = Attendance.where(event_id: @event.id, user_id: current_user.id)
+    #C'est un tableau: s'il est vide, alors c'est que le current_user ne participe pas à l'événement en question
+    if att_list == []
+      return true
+    end
+  end
+
+
+
 
 
 end
