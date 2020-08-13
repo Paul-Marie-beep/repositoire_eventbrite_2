@@ -1,4 +1,5 @@
 class ChargesController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @event = Event.find(params[:event_id])
@@ -17,6 +18,9 @@ class ChargesController < ApplicationController
       source: params[:stripeToken],
     })
   
+    #On stocke les données de stripe
+    @stripe_id = params[:stripeToken]
+
     charge = Stripe::Charge.create({
       customer: customer.id,
       amount: @amount_cent,
@@ -24,10 +28,8 @@ class ChargesController < ApplicationController
       currency: 'eur',
     })
 
-    flash[:success] = "Vous avez validé votre participation à cet événement"
-    redirect_to event_path(@event.id) #On redirect vers le controller pour créer une nouvelle attendance plutôt je pense. Après manger en tout cas.
-    
-
+    #flash[:success] = "Vous avez validé votre participation à cet événement"
+    redirect_to new_event_attendance_path(@event.id) #On redirect vers une méthode attendances#new pour incrire le gars à l'événement
   
   rescue Stripe::CardError => e
     flash[:error] = e.message

@@ -1,2 +1,16 @@
-<h1>Attendances#new</h1>
-<p>Find me in app/views/attendances/new.html.erb</p>
+<div class="alert alert-success" role="alert">
+Vous avez validé votre paiement et êtes bien inscrit à l'événement
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <br><br><br>
+
+
+      <a type="button" href= "<%= event_path(params[:event_id]) %>"  class="btn btn-primary btn-lg btn-block">Revenir sur la page de l'événement</a>
+      <a type="button" href = "<%= events_path%>" class="btn btn-secondary btn-lg btn-block">Voir tous les événements</a>
+
+    </div>
+  </div>
+</div>  

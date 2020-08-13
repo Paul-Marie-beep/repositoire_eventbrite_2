@@ -6,13 +6,20 @@ Rails.application.routes.draw do
 
   resources :events
 
+
+  #On fait des redirect parce que, pour le paiement et pour créer une participation, 
+  # on a besoin de récupérer des infos des events (typiquemqent event.id)
   resources :events do
     resources :charges
   end
 
+  resources :events do
+    resources :attendances
+  end
+
+
   #On ne veut pas que ça en fasse trop pour se culbuter avec les trucs de Devise
   resources :users, only: [:show]
-  resources :attendances, only: [:new, :index]
 
   root 'events#index'
 end
