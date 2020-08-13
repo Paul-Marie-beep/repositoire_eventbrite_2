@@ -38,7 +38,7 @@ class EventsController < ApplicationController
   def update
    if  @event.update(event_params)
     redirect_to event_path(@event.id)
-    flash[:succes] = "Vous avez modifié votre potin"
+    flash[:succes] = "Vous avez modifié votre événement"
     else
       flash[:warning] = "Nous n'avons pas pu modifier votre événement"
       render 'edit.html.erb'
