@@ -20,7 +20,32 @@
               <li class="list-group-item">Fin de l'événement: <%= @end_date%></li>
               <li class="list-group-item">Lieu: <%= @event.location %></li>
               <li class="list-group-item">Prix: <%= @event.price %>€</li>
+           
+
+              <!-- #On fait deux cas: il y a déjà une image présente ou il n'y a pas d'image et dans les deux cas, -->
+           <!-- #on vérifie que la personne est bien l'admin de l'event avant de l'autoriser à changer quoi que ce soit -->
+              <%if @event.event_picture.attached?%>
+                <%if @not_admin == false %>
+                  <center><li class="list-group-item"><%= image_tag @event.event_picture, alt: 'event_picture' %></center> <br><br>              </li>
+                  <h5>Changer d'image ?</h5>
+                    <%= form_tag  event_event_pictures_path(@event.id), multipart: true do %>
+                      <%= file_field_tag :event_picture%>
+                      <%= submit_tag "mettre à jour",class: "btn btn-sm btn-primary" %>
+                    <% end %>
+                <%end%>    
+              <%elsif %>
+                <%if @not_admin == false %>  
+                  <li class="list-group-item">Il n'y a pas encore d'image liée à cet événement</li>
+                  <h3>Ajouter une image ?</h3>
+                  <%= form_tag  event_event_pictures_path(@event.id), multipart: true do %>
+                    <%= file_field_tag :event_picture %>
+                    <%= submit_tag "enregistrer" %>
+                  <% end %>
+                <%end%>  
+              
+              <%end%>
             </ul>
+
 
 
             <br><br>
