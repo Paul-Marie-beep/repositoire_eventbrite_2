@@ -9,8 +9,8 @@ class EventsController < ApplicationController
   end
 
   def show
-    end_date(@event)
-    @not_participant= not__a_participant(@event)
+    end_date
+    @not_participant= not__a_participant
     @not_admin = not_admin
 
   end
@@ -57,23 +57,23 @@ class EventsController < ApplicationController
 
 
 
-  private
+  private #Aller voir les helpers pour vérifier si des choses n'y sont pas
 
   #Trouver la date de fin de l'événement
-  def end_date(event)
-    @end_date = event.start_date + event.duration
+  def end_date
+    @end_date = @event.start_date + @event.duration
   return @end_date
   end  
 
   #Vérifier que quelqu'un qui est connecté sur le site ne participie pas déjà à l'événement dont il regarde la page
-  def not__a_participant(event)
+  def not__a_participant
     if current_user  #Pour pas casser le site si on veut voir une page en étant pas connecté (dans l'idée, il faudrait pouvoir cliquer sur le bouton en étant pas connecté mais on verra après)
       #Attendance, c'est la table de jointure users/events —> On cherche les attendances qui font correspondre le personne connectée avec les événéments qu'il regarde
         att_list = Attendance.where(event_id: @event.id, user_id: current_user.id)
       #C'est un tableau: s'il est vide, alors c'est que le current_user ne participe pas à l'événement en question
-      if att_list == []
-        return true
-      end
+        if att_list == []
+          return true
+        end
     end    
   end
 
