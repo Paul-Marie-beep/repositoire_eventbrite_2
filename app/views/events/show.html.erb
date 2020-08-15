@@ -39,7 +39,7 @@
                   <h3>Ajouter une image ?</h3>
                   <%= form_tag  event_event_pictures_path(@event.id), multipart: true do %>
                     <%= file_field_tag :event_picture %>
-                    <%= submit_tag "enregistrer" %>
+                    <%= submit_tag "enregistrer", class: "btn btn-sm btn-primary" %>
                   <% end %>
                 <%end%>  
               
