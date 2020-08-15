@@ -9,13 +9,14 @@
       <h5 class="card-title"><%= @user.last_name %></h5>
       <h6 class="card-title"><%= @user.first_name %></h6>
       <p> <h8 class="card-title"><%= @user.email %></h8> </p>  
+      <p class="card-text"> <%=@user.description %></p>
+     
       <%if @user.profile_picture.attached?%>
         <%= image_tag @user.profile_picture, alt: 'profile_picture' %>
       <%else%>
         <img src = "/blank_pp_resize.png" alt = profile_picture" title = "photo de profil générique"  />
       <%end%>
 
-        <p class="card-text"> <%=@user.description %></p>
         <a href="<%= edit_user_registration_path %>" class="btn btn-warning">Changer mes informations de connection</a>
         <a href="<%= edit_user_registration_path %>" class="btn btn-primary">Ajouter une photo de profil</a>
       </div>
