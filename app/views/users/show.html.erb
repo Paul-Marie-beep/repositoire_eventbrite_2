@@ -12,7 +12,7 @@
       <%if @user.profile_picture.attached?%>
         <%= image_tag @user.profile_picture, alt: 'profile_picture' %>
       <%else%>
-        <p>=== Il n'y a pas encore de photo de profil lié à cet utilisateur ===</p>
+        <img src = "/blank_pp_resize.png" alt = profile_picture" title = "photo de profil générique"  />
       <%end%>
 
         <p class="card-text"> <%=@user.description %></p>
