@@ -17,8 +17,13 @@
         <img src = "/blank_pp_resize.png" alt = profile_picture" title = "photo de profil générique"  />
       <%end%>
         <br> <br>
-        <a href="<%= edit_user_registration_path %>" class="btn btn-warning">Changer mes informations de connection</a>
-        <a href="<%= edit_user_registration_path %>" class="btn btn-primary">Ajouter une photo de profil</a>
+        <!-- #On rajoute juste la condition sur les boutons car sinon, un admin du site pourrait appuyer dessus et se retrouver à 
+        #modifier son propre profil alors qu'il pense changer celui de quelqu'un d'autre. Mais pas d'impact sur l'utilisateur lambda qui regarde son propre profil -->
+        <% if current_user == @user %>
+          <a href="<%= edit_user_registration_path %>" class="btn btn-warning">Changer mes informations de connection</a>
+          <a href="<%= edit_user_registration_path %>" class="btn btn-primary">Ajouter une photo de profil</a>
+        <%else%>  
+        <%end%>
       </div>
     </div>
 
