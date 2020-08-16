@@ -35,6 +35,10 @@
             <h2><%= event.title%> </h2>
             <p> <%= event.description %> </p>
             <p><a class="btn btn-secondary" href="<%= event_path(event.id) %>" role="button">Voir l'événement &raquo;</a></p>
+           <!-- Pour qu'un administrateur du site puisse dé-valider un événement -->
+            <% if current_user.is_admin == true %>
+            <p><a class="btn btn-warning" href="<%= edit_event_submission_path(event.id) %>"role="button">Dé-valider l'événement &raquo;</a></p>
+            <%end%>
           </div>
         </div>
       <%end%>

@@ -38,5 +38,8 @@ Rails.application.routes.draw do
 
   resources :admins, only: [:index]
 
+  resources :event_submissions
+ 
+
   root 'events#index'
 end
