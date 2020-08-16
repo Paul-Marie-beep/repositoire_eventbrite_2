@@ -11,6 +11,7 @@
       <p> <h8 class="card-title"><%= @user.email %></h8> </p>  
       <p class="card-text"> <%=@user.description %></p>
      <br>
+     <!-- #Si il y a une photo associée, on la montre, sinon, on en affiche une générique -->
       <%if @user.profile_picture.attached?%>
         <%= image_tag @user.profile_picture, alt: 'profile_picture' %>
       <%else%>
