@@ -1,0 +1,25 @@
+
+<div class="container">
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <br>
+    <center><h1>Voici la liste des utilisateurs</h1></center>
+    <br><br>
+
+      <% @all_users.each do |user| %>
+
+        <ul class="list-group">
+          <li class="list-group-item active"><%=user.first_name%> <%=user.last_name%></li>
+          <li class="list-group-item"><%=user.email%></li>
+          <li class="list-group-item"><a type="button" href = "<%=user_path(user.id)%>" class="btn btn-primary">Voir le profil</a>
+          </li>
+          <li class="list-group-item"><a type="button" href = "<%=edit_user_admin_path(user.id)%>" class="btn btn-warning">Modifier le profil</a>
+          </li>
+          <li class="list-group-item"> <a href="<%= user_admin_path(user.id) %>" class="btn btn-danger" data-confirm="êtes-vous sur?" data-method="DELETE">Supprimer l'utilisateur</a>
+
+        </ul> <br><br>
+      <%end%>  
+    
+    </div>
+  </div>
+</div>     

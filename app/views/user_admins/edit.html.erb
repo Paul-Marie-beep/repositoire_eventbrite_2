@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <br>
+
+
+      <% if @user.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p>La modification n'a pu aboutir pour les raisons suivantes :</p>
+        </div>
+        <div class="alert alert-warning" role="alert">
+        <ul>
+          <% @event.errors.full_messages.each do |message| %>
+          <p> <%= message %> </p>
+          <% end %>
+        </ul>
+        </div>
+      <% end %>
+
+      <h1 class="h3 mb-3 font-weight-normal text-center ">Modifier un profil</h1>
+
+      <h3>Voici le profil actuel</h3>  
+        <div class="card">
+        <div class="card-body">
+        <h5 class="card-title"><%= @user.last_name %></h5>
+        <h6 class="card-title"><%= @user.first_name %></h6>
+        <p> <h8 class="card-title"><%= @user.email %></h8> </p>  
+        <p class="card-text"> <%=@user.description %></p>
+      <br>
+        <%if @user.profile_picture.attached?%>
+          <%= image_tag @user.profile_picture, alt: 'profile_picture' %>
+        <%else%>
+          <img src = "/blank_pp_resize.png" alt = profile_picture" title = "photo de profil générique"  />
+        <%end%>
+          <br> <br>
+        </div>
+      </div>
+
+      <br>      <br>      <br>      <br>
+
+
+
+
+      <h3>Modifier les informations</h3>  
+
+      <%= form_tag user_admin_path(params[:id]), method: "patch" do  %>
+        <%= label_tag 'Email' %><br>
+        <%= text_field_tag 'email', "" %><br><br>
+        <%= label_tag 'Mot de passe' %><br>
+        <%= text_field_tag 'password', "" %><br><br>
+        <%= submit_tag 'Modifier le profil'%>
+        <% end %>
+
+      <br><br><br>

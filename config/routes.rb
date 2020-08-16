@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
 
 
+  get 'admins/index'
   get 'profile_pictures/create'
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -30,6 +31,12 @@ Rails.application.routes.draw do
   resources :users do
     resources :profile_pictures, only: [:create]
   end
+
+  resources :user_admins do
+    resources :events, :users
+  end
+
+  resources :admins, only: [:index]
 
   root 'events#index'
 end
