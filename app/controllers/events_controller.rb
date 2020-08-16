@@ -2,18 +2,22 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update, :create]
   before_action :is_admin, only: [:edit, :update, :destroy]
   before_action :event_chosen, only: [:show, :edit, :update, :destroy]
+  before_action :is_validated, only: [:edit]
 
 
   def index
-    @all_events = Event.all
+    @all_events_validated = Event.where(validated: true)
   end
 
   def show
-    end_date
+    #Il ne faut pas qu'un utilisateur lambda puisse accéder à la page d'un événement non-validé 
+    #mais il faut qu'un admin le puisse (cf.la def de la méthode ci-dessous)
+    is_validated_or_website_admin
     @not_participant= not__a_participant
     @not_admin = not_admin
+  end 
 
-  end
+  
 
   def new 
     @new_event = Event.new #il faut créer l'élément pour que le formulaire fonctionne
@@ -25,7 +29,7 @@ class EventsController < ApplicationController
     @new_event = Event.new(start_date: params[:start_date], duration: params[:duration], title: params[:title], description: params[:description], price: params[:price], location: params[:location])
     @new_event.admin = current_user
       if @new_event.save
-        render 'index.html.erb'
+        redirect_to events_path
       else
         render 'new.html.erb'
       end
@@ -102,6 +106,22 @@ class EventsController < ApplicationController
   def event_params
     @event_params = params.require(:event).permit(:title, :description, :start_date, :duration, :price, :location) 
   end
+
+  def is_validated_or_website_admin
+    #En gros, si l'événement est validé, tous les gens connectés peuvent le voir mais s'il n'est pas validé,
+    # il faut être administrateur pour aller sur la page de l'événement.
+    event_chosen
+    if @event.validated == true
+    else
+      if current_user.is_admin == true
+      else
+        redirect_to root_path
+        flash[:alert] = "Cet événement est en attente de validation"
+      end
+    end
+  end
+  
+
 
 
 
