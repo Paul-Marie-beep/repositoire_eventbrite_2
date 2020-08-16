@@ -15,6 +15,7 @@ class EventsController < ApplicationController
     is_validated_or_website_admin
     @not_participant= not__a_participant
     @not_admin = not_admin
+    @current_user_is_admin = current_user_is_admin #(OSF) Pour régler les effets de bord de la condition pour qu'un admin puisse dévalider un truc déjà validé
   end 
 
   
@@ -118,6 +119,14 @@ class EventsController < ApplicationController
         redirect_to root_path
         flash[:alert] = "Cet événement est en attente de validation"
       end
+    end
+  end
+
+  def current_user_is_admin
+    if current_user && current_user.is_admin == true
+      return true
+    else
+      return false
     end
   end
   
