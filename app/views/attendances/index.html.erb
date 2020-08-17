@@ -17,7 +17,7 @@
       <p>Il n'y a pas encore de participant</p>
       <%else%>
       <% @all_attendances_for_this_event.each do |attendance| %>
-        <li class="list-group-item"><%= attendance.user.first_name %>  <%= attendance.user.first_name %> participe à ton événement! </li>
+        <li class="list-group-item"><%= attendance.user.first_name %>  <%= attendance.user.last_name %> participe à ton événement! </li>
         </ul>
       <%end%>
       <%end%>
